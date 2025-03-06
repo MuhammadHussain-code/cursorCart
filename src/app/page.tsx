@@ -209,9 +209,9 @@ export default function Home() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[250px]"
+                  className="px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[250px] placeholder-gray-300"
                 />
-                <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition-colors">
+                <button className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium transition-colors text-white">
                   Subscribe
                 </button>
               </div>

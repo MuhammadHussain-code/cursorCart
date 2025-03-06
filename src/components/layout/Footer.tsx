@@ -38,7 +38,7 @@ export default function Footer() {
             <Link href="/" className="text-2xl font-bold text-white">
               NextShop
             </Link>
-            <p className="mt-4 text-slate-400 max-w-md">
+            <p className="mt-4 text-slate-300 max-w-md">
               Your one-stop shop for all your needs. We offer high-quality
               products at competitive prices with fast shipping and exceptional
               customer service.
@@ -46,7 +46,7 @@ export default function Footer() {
             <div className="mt-6 flex space-x-4">
               <a
                 href="#"
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-slate-300 hover:text-white transition-colors"
                 aria-label="Facebook"
               >
                 <svg
@@ -64,7 +64,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-slate-300 hover:text-white transition-colors"
                 aria-label="Instagram"
               >
                 <svg
@@ -82,7 +82,7 @@ export default function Footer() {
               </a>
               <a
                 href="#"
-                className="text-slate-400 hover:text-white transition-colors"
+                className="text-slate-300 hover:text-white transition-colors"
                 aria-label="Twitter"
               >
                 <svg
@@ -107,7 +107,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-slate-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -125,7 +125,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-slate-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -143,7 +143,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-slate-400 hover:text-white transition-colors"
+                    className="text-slate-300 hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -154,7 +154,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-slate-700 flex flex-col lg:flex-row justify-between items-center">
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate-300">
             © {currentYear} NextShop. All rights reserved.
           </p>
           <ul className="mt-4 lg:mt-0 flex space-x-6">
@@ -162,7 +162,7 @@ export default function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-xs text-slate-400 hover:text-white transition-colors"
+                  className="text-xs text-slate-300 hover:text-white transition-colors"
                 >
                   {link.label}
                 </Link>

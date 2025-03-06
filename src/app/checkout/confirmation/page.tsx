@@ -82,26 +82,26 @@ export default function OrderConfirmation() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-16 bg-gray-800 text-white">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4">
             <CheckCircle className="h-8 w-8 text-green-600" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-white mb-2">
             Order Confirmed!
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-300">
             Thank you for your purchase. Your order has been received.
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <div className="border-b border-gray-200 pb-4 mb-4">
-            <h2 className="text-lg font-semibold text-gray-900">
+        <div className="bg-gray-700 rounded-lg shadow-sm p-6 mb-8">
+          <div className="border-b border-gray-600 pb-4 mb-4">
+            <h2 className="text-lg font-semibold text-white">
               Order #{orderId?.slice(0, 8)}
             </h2>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-300">
               Placed on{" "}
               {order?.createdAt
                 ? new Date(order.createdAt).toLocaleDateString("en-US", {
@@ -115,59 +115,59 @@ export default function OrderConfirmation() {
 
           <div className="space-y-4">
             <div className="flex justify-between">
-              <span className="text-gray-600">Order Total</span>
-              <span className="font-semibold">
+              <span className="text-gray-300">Order Total</span>
+              <span className="font-semibold text-white">
                 ${order?.total?.toFixed(2)}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Payment Method</span>
-              <span className="font-semibold">
+              <span className="text-gray-300">Payment Method</span>
+              <span className="font-semibold text-white">
                 {order?.paymentMethod === "STRIPE"
                   ? "Credit Card"
                   : "Cash on Delivery"}
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-600">Order Status</span>
-              <span className="font-semibold capitalize">
+              <span className="text-gray-300">Order Status</span>
+              <span className="font-semibold capitalize text-white">
                 {order?.status?.toLowerCase()}
               </span>
             </div>
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        <div className="bg-gray-700 rounded-lg shadow-sm p-6 mb-8">
+          <h2 className="text-lg font-semibold text-white mb-4">
             Delivery Information
           </h2>
           <div className="space-y-4">
             <div className="flex">
               <div className="flex-shrink-0 mr-3">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                  <Package className="h-5 w-5 text-blue-600" />
+                <div className="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center">
+                  <Package className="h-5 w-5 text-blue-300" />
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-900">
+                <h3 className="text-sm font-medium text-white">
                   Order Processing
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-300">
                   Your order is being prepared for shipping
                 </p>
               </div>
             </div>
             <div className="flex">
               <div className="flex-shrink-0 mr-3">
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                  <Truck className="h-5 w-5 text-gray-600" />
+                <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
+                  <Truck className="h-5 w-5 text-gray-300" />
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-900">
+                <h3 className="text-sm font-medium text-white">
                   Estimated Delivery
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-300">
                   {new Date(
                     Date.now() + 7 * 24 * 60 * 60 * 1000
                   ).toLocaleDateString("en-US", {
@@ -180,15 +180,15 @@ export default function OrderConfirmation() {
             </div>
             <div className="flex">
               <div className="flex-shrink-0 mr-3">
-                <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                  <Clock className="h-5 w-5 text-gray-600" />
+                <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center">
+                  <Clock className="h-5 w-5 text-gray-300" />
                 </div>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-gray-900">
+                <h3 className="text-sm font-medium text-white">
                   Delivery Updates
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-300">
                   You will receive email updates about your order status
                 </p>
               </div>

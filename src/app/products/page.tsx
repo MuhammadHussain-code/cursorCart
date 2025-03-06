@@ -84,7 +84,7 @@ const categories = [
 export default function ProductsPage() {
   return (
     <div className="container mx-auto px-4 py-16">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">All Products</h1>
+      <h1 className="text-3xl font-bold text-gray-100 mb-8">All Products</h1>
 
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Filters - In a real app, these would be interactive */}

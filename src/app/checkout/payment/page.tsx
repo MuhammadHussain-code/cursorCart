@@ -8,10 +8,10 @@ import { loadStripe } from "@stripe/stripe-js";
 import { CreditCard, AlertCircle } from "lucide-react";
 import Link from "next/link";
 
-// Initialize Stripe
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
-);
+// For development, we don't need to actually load Stripe unless the key is set
+const stripePromise = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY 
+  ? loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) 
+  : Promise.resolve(null);
 
 export default function PaymentPage() {
   const { data: session, status } = useSession();
@@ -91,12 +91,13 @@ export default function PaymentPage() {
     setPaymentStatus("processing");
     
     try {
-      // In a real implementation, you would:
+      // In development, we're using a simulated approach that doesn't require Stripe.js
+      // In production, you would:
       // 1. Load Stripe Elements
       // 2. Create a payment method
       // 3. Confirm the payment intent with the payment method
       
-      // For this demo, we'll simulate a successful payment
+      // For now, we'll just call our confirmation API
       const response = await fetch(`/api/payments/confirm`, {
         method: "POST",
         headers: {
@@ -136,24 +137,24 @@ export default function PaymentPage() {
   if (error) {
     return (
       <div className="container mx-auto px-4 py-16">
-        <div className="max-w-md mx-auto bg-white rounded-lg shadow-sm p-6">
+        <div className="max-w-md mx-auto bg-gray-700 rounded-lg shadow-sm p-6">
           <div className="text-center mb-6">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-4">
-              <AlertCircle className="h-6 w-6 text-red-600" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-red-900 rounded-full mb-4">
+              <AlertCircle className="h-6 w-6 text-red-400" />
             </div>
-            <h1 className="text-xl font-bold text-gray-900">Payment Error</h1>
-            <p className="mt-2 text-gray-600">{error}</p>
+            <h1 className="text-xl font-bold text-white">Payment Error</h1>
+            <p className="mt-2 text-gray-300">{error}</p>
           </div>
           <div className="flex justify-center space-x-4">
             <Link
               href="/cart"
-              className="text-blue-600 hover:text-blue-800 font-medium"
+              className="text-blue-400 hover:text-blue-300 font-medium"
             >
               Return to Cart
             </Link>
             <button
               onClick={() => window.location.reload()}
-              className="text-blue-600 hover:text-blue-800 font-medium"
+              className="text-blue-400 hover:text-blue-300 font-medium"
             >
               Try Again
             </button>
@@ -164,19 +165,19 @@ export default function PaymentPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-16">
+    <div className="container mx-auto px-4 py-16 bg-gray-800">
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Complete Payment</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-2xl font-bold text-white">Complete Payment</h1>
+          <p className="mt-2 text-gray-300">
             Your order #{orderId?.slice(0, 8)} is almost complete
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div className="bg-gray-700 rounded-lg shadow-sm p-6 mb-6">
           <div className="flex justify-between mb-4">
-            <span className="text-gray-600">Order Total</span>
-            <span className="font-semibold">
+            <span className="text-gray-300">Order Total</span>
+            <span className="font-semibold text-white">
               ${orderDetails?.total.toFixed(2)}
             </span>
           </div>
@@ -198,10 +199,10 @@ export default function PaymentPage() {
                   />
                 </svg>
               </div>
-              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+              <h2 className="text-xl font-semibold text-white mb-2">
                 Payment Successful!
               </h2>
-              <p className="text-gray-600">
+              <p className="text-gray-300">
                 Redirecting you to the confirmation page...
               </p>
             </div>
@@ -210,7 +211,7 @@ export default function PaymentPage() {
               <div className="mb-6">
                 <label
                   htmlFor="cardNumber"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium text-gray-300 mb-1"
                 >
                   Card Number
                 </label>
@@ -219,7 +220,7 @@ export default function PaymentPage() {
                     type="text"
                     id="cardNumber"
                     placeholder="4242 4242 4242 4242"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 pl-10 py-2"
+                    className="block w-full rounded-md border-gray-600 bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 pl-10 py-2 text-white"
                     disabled={paymentStatus === "processing"}
                   />
                   <CreditCard className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
@@ -230,7 +231,7 @@ export default function PaymentPage() {
                 <div>
                   <label
                     htmlFor="expiry"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-300 mb-1"
                   >
                     Expiry Date
                   </label>
@@ -238,14 +239,14 @@ export default function PaymentPage() {
                     type="text"
                     id="expiry"
                     placeholder="MM / YY"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2"
+                    className="block w-full rounded-md border-gray-600 bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 text-white"
                     disabled={paymentStatus === "processing"}
                   />
                 </div>
                 <div>
                   <label
                     htmlFor="cvc"
-                    className="block text-sm font-medium text-gray-700 mb-1"
+                    className="block text-sm font-medium text-gray-300 mb-1"
                   >
                     CVC
                   </label>
@@ -253,7 +254,7 @@ export default function PaymentPage() {
                     type="text"
                     id="cvc"
                     placeholder="123"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2"
+                    className="block w-full rounded-md border-gray-600 bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 text-white"
                     disabled={paymentStatus === "processing"}
                   />
                 </div>
@@ -262,7 +263,7 @@ export default function PaymentPage() {
               <div className="mb-6">
                 <label
                   htmlFor="name"
-                  className="block text-sm font-medium text-gray-700 mb-1"
+                  className="block text-sm font-medium text-gray-300 mb-1"
                 >
                   Name on Card
                 </label>
@@ -270,7 +271,7 @@ export default function PaymentPage() {
                   type="text"
                   id="name"
                   placeholder="John Doe"
-                  className="block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2"
+                  className="block w-full rounded-md border-gray-600 bg-gray-800 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-2 text-white"
                   disabled={paymentStatus === "processing"}
                 />
               </div>
@@ -285,9 +286,9 @@ export default function PaymentPage() {
                   : `Pay $${orderDetails?.total.toFixed(2)}`}
               </button>
 
-              <p className="mt-4 text-xs text-gray-500 text-center">
+              <p className="mt-4 text-xs text-gray-400 text-center">
                 For testing, use card number 4242 4242 4242 4242, any future
-                date, any 3 digits for CVC, and any name.
+                date, any 3 digits for CVC, and any name. (Development Mode: All payments will succeed)
               </p>
             </form>
           )}
@@ -296,7 +297,7 @@ export default function PaymentPage() {
         <div className="text-center">
           <Link
             href="/cart"
-            className="text-sm text-blue-600 hover:text-blue-800"
+            className="text-sm text-blue-400 hover:text-blue-300"
           >
             Cancel and return to cart
           </Link>
